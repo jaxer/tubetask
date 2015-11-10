@@ -14,22 +14,26 @@
 ActiveRecord::Schema.define(version: 20151110150032) do
 
   create_table "organizations", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "external_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "name",             limit: 255
+    t.integer  "external_id",      limit: 4
+    t.datetime "sync_started_at"
+    t.datetime "sync_finished_at"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
-  create_table "relations", id: false, force: :cascade do |t|
-    t.integer  "relation_type"
-    t.integer  "external_id"
-    t.integer  "organization_id"
-    t.integer  "related_organization_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+  create_table "relations", force: :cascade do |t|
+    t.integer  "relation_type",           limit: 4
+    t.integer  "external_id",             limit: 4
+    t.integer  "organization_id",         limit: 4
+    t.integer  "related_organization_id", limit: 4
+    t.datetime "sync_started_at"
+    t.datetime "sync_finished_at"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
-  add_index "relations", ["organization_id"], name: "index_relations_on_organization_id"
-  add_index "relations", ["related_organization_id"], name: "index_relations_on_related_organization_id"
+  add_index "relations", ["organization_id"], name: "index_relations_on_organization_id", using: :btree
+  add_index "relations", ["related_organization_id"], name: "index_relations_on_related_organization_id", using: :btree
 
 end

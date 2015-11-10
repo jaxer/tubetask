@@ -4,6 +4,9 @@ class CreateOrganizations < ActiveRecord::Migration
       t.string :name
       t.integer :external_id
 
+      t.datetime :sync_started_at
+      t.datetime :sync_finished_at
+
       t.timestamps null: false
     end
   end

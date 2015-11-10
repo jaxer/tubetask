@@ -42,28 +42,28 @@ class OrganizationsController < ApplicationController
 
   def create
     json = JSON.parse request.body.read
-    (new_organizations, new_relations) = Organization.create_from_json(json)
+    Organization.create_from_json(json)
 
-    new_organizations.each do |organization|
-      OrganizationCreateJob.perform_later organization
-    end
+    SyncJob.perform_later
 
-    new_relations.each do |rel|
-      RelationCreateJob.perform_later(rel.organization, rel.related_organization)
-    end
-
-    render json: {new_organizations: new_organizations, new_relations: new_relations}
+    render json: {success: true}
   rescue Organization::Error => e
-    render :json => {:error => e.message}, :status => :unprocessable_entity
+    render :json => {success: false, error: e.message}, :status => :unprocessable_entity
   end
 
   api :DELETE, '/organizations', "Delete ALL organizations and relations."
   description "Destroy all organizations and corresponding relations."
 
   def destroy_all
+    ids = Organization.where.not(external_id: nil).pluck 'external_id'
+
+    unless ids.empty?
+      DeleteAllJob.perform_later ids
+    end
+
     Organization.destroy_all
 
-    head :no_content
+    render :json => {success: true}
   end
 
 end
