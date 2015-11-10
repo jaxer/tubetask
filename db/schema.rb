@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20151110150032) do
   end
 
   create_table "relations", id: false, force: :cascade do |t|
-    t.integer  "type"
+    t.integer  "relation_type"
     t.integer  "external_id"
     t.integer  "organization_id"
     t.integer  "related_organization_id"
