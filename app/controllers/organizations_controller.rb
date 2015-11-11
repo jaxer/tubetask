@@ -34,7 +34,7 @@ class OrganizationsController < ApplicationController
       ],
       "relatives": [
           {
-              "org_name:": "Hawaii Island"
+              "org_name": "Hawaii Island"
           }
       ]
   }

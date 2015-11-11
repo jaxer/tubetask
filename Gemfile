@@ -9,5 +9,7 @@ gem 'httparty'
 
 gem 'spring', :group => :development
 gem 'rspec-rails', :group => :development
+gem 'rspec-activejob', :group => :development
+gem 'factory_girl_rails'
 
 gem 'sinatra', :require => nil

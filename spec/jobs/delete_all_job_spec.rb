@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe DeleteAllJob, type: :job do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "Posts to pipedrive" do
+    expect(Pipedrive).to receive(:delete).with(
+        '/v1/organizations', body: {ids: [1, 4, 8]})
+    DeleteAllJob.perform_now [1, 4, 8]
+  end
 end

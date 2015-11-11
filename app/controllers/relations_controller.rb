@@ -13,11 +13,13 @@ class RelationsController < ApplicationController
       org_ids.add rel.related_organization_id
     end
 
+    @organizations = Organization.find(org_ids.to_a)
+
     render json: {
                success: true,
                data: @relations,
                related_objects: {
-                   organization: Organization.find(org_ids.to_a)
+                   organization: @organizations
                }}
   rescue ActiveRecord::RecordNotFound => e
     render json: {success: false, error: e.message}

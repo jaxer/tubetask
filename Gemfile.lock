@@ -60,6 +60,11 @@ GEM
     connection_pool (2.2.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hitimes (1.2.3)
@@ -115,6 +120,9 @@ GEM
     redis (3.2.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
+    rspec-activejob (0.6.1)
+      activejob (>= 4.2)
+      rspec-mocks
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.1)
@@ -162,10 +170,12 @@ PLATFORMS
 
 DEPENDENCIES
   apipie-rails
+  factory_girl_rails
   httparty
   mysql2 (~> 0.3.18)
   rails (= 4.2.4)
   rails-api
+  rspec-activejob
   rspec-rails
   sidekiq
   sinatra
