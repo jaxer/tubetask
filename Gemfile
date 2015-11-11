@@ -5,6 +5,7 @@ gem 'rails-api'
 gem 'mysql2', '~> 0.3.18'
 gem 'apipie-rails'
 gem 'sidekiq'
+gem 'foreman'
 gem 'httparty'
 
 gem 'spring', :group => :development

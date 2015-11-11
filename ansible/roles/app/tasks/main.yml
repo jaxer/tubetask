@@ -1,0 +1,5 @@
+---
+- name: install gem with proper $PATH
+  gem:
+    name: bundle
+    user_install: no
