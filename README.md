@@ -23,6 +23,8 @@ Open ```http://192.168.33.99:3000/jobs``` to see and manage ```Sidekiq``` backen
 
 All communication with pipedrive is logged to log/pipedrive.log.
 
+phpMyAdmin available at ```http://192.168.33.99/phpmyadmin``` (user ```root```, pass ```123```)
+
 Running tests
 -------------
 

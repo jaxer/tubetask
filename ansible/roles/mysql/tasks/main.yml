@@ -33,3 +33,27 @@
 
 - name: mysql | Create users
   mysql_user: name={{ mysql.user }} password={{ mysql.password }} priv=*.*:ALL state=present login_user=root login_password={{ mysql.root_password }}
+
+
+- name: debconf for pma
+  debconf: name=phpmyadmin question='phpmyadmin/dbconfig-install' value='true' vtype='boolean'
+
+- name: debconf for pma
+  debconf: name=phpmyadmin question='phpmyadmin/app-password-confirm' value='{{mysql.root_password}}' vtype='password'
+
+- name: debconf for pma
+  debconf: name=phpmyadmin question='phpmyadmin/mysql/admin-pass' value='{{mysql.root_password}}' vtype='password'
+
+- name: debconf for pma
+  debconf: name=phpmyadmin question='phpmyadmin/mysql/app-pass' value='{{mysql.root_password}}' vtype='password'
+
+- name: debconf for pma
+  debconf: name=phpmyadmin question='phpmyadmin/reconfigure-webserver' value='' vtype='multiselect'
+
+- name: install pma
+  apt: pkg=phpmyadmin state=present
+
+- name: configure site
+  file: path=/etc/apache2/sites-enabled/phpmyadmin.conf src=/etc/phpmyadmin/apache.conf state=link
+
+- service: name=apache2 state=reloaded
